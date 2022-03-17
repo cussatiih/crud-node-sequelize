@@ -50,8 +50,8 @@ class UserController {
         });
       }
 
-      const updatedUser = await user.update(req.body);
-      const { nome, email } = updatedUser;
+      const userAtualizado = await user.update(req.body);
+      const { nome, email } = userAtualizado;
 
       return res.status(200).json({ id, nome, email });
     } catch (e) {
@@ -79,7 +79,9 @@ class UserController {
 
       await user.destroy();
 
-      return res.status(200).json('Usuario Apagado.');
+      return res.status(200).json({
+        apagado: true,
+      });
     } catch (e) {
       return res.status(400).json({
         errors: e.errors.map((err) => err.message),
